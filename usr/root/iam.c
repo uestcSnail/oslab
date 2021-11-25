@@ -7,6 +7,7 @@ int main(int argc, const char** args){
     if (argc == 2)
     {
         ret = iam(args[1]);
+        printf("%d\n", ret);
         printf("input name: %s\n", args[1]);
     }else{
         printf("iam [name]\n");

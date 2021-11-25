@@ -1,3 +1,13 @@
+.DS_Store
 /hdc
 *.o
 *.a
+
+hdc-0.11.img
+bochsout.txt
+linux-0.11/boot/bootsect
+linux-0.11/boot/setup
+linux-0.11/Image
+linux-0.11/System.map
+linux-0.11/tools/build
+linux-0.11/tools/system
