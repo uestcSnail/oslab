@@ -282,9 +282,11 @@ class process:
 		return self.states[-1][S_TIME]
 		
 # Enter point
-if len(sys.argv) < 2:
-	print(usage.replace("%s", sys.argv[0]))
-	sys.exit(0)
+import os
+if not os.path.exists("../hdc/var/process.log"):
+	if len(sys.argv) < 2 or sys.argv[1] == '-h' or sys.argv[1] == '--help':
+		print(usage.replace("%s", sys.argv[0]))
+		sys.exit(0)
 
 # parse arguments
 include = []
@@ -315,7 +317,7 @@ except ValueError:
 # parse log file and construct processes
 processes = process_pool()
 
-f = open(sys.argv[1], "r")
+f = open(sys.argv[1], "r") if sys.argv.__len__() >= 2 else open("../hdc/var/process.log", "r")
 
 # Patch process 0's New & Run state
 processes.new(0, 40).change_state(P_RUNNING, 40)

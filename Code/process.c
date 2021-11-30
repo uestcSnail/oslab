@@ -9,6 +9,40 @@ void cpuio_bound(int last, int cpu_time, int io_time);
 
 int main(int argc, char * argv[])
 {
+	int pid, a;
+	printf("....begin..... \n");
+	if ((pid = fork()) == 0) {
+		printf("..pid1 begin..\n");
+		cpuio_bound(10, 1, 0);
+		return 0;
+	}
+	printf("..pid1 : %d\n", pid);
+	if ((pid = fork()) == 0) {
+		printf("..pid2 begin..\n");
+		cpuio_bound(10, 0, 1);
+		return 0;
+	}
+	printf("..pid2 : %d\n", pid);
+	if ((pid = fork()) == 0) {
+		printf("..pid3 begin..\n");
+		cpuio_bound(10, 1, 1);
+		return 0;
+	}
+	printf("..pid3 : %d\n", pid);
+	if ((pid = fork()) == 0) {
+		printf("..pid4 begin..\n");
+		cpuio_bound(10, 1, 8);
+		return 0;
+	}
+	printf("..pid4 : %d\n", pid);
+	if ((pid = fork()) == 0) {
+		printf("..pid5 begin..\n");
+		cpuio_bound(10, 9, 1);
+		return 0;
+	}
+	printf("..pid5 : %d\n", pid);
+	while ((a = wait(NULL)) != -1) printf("pid %d exit \n", a);
+	printf(".....end....\n");
 	return 0;
 }
 
